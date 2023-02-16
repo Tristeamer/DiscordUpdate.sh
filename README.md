@@ -10,7 +10,7 @@ I'll probably still try to fix bugs though :)
 ## Installation/Usage
 
 1. Download `DiscordUpdate.sh` from this repo.
-2. run `chmod u+x DiscordUpdate.sh` in the directory that `DiscordUpdate.sh` is downloaded to.
+2. run `chmod u+x DiscordUpdate.sh` in the directory that `DiscordUpdate.sh` is downloaded to. (to make the script actually executeable)
 3. run `DiscordUpdate.sh`
 
 yea the code is shit but idc, if it works it works ¯\_(ツ)_/¯
