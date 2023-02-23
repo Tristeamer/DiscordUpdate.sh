@@ -18,7 +18,7 @@ function disc_exists () {
     if [ -e /usr/bin/Discord ]
 
     then
-        TITLE="DiscordUpdate.sh: ${RED}Error: Discord installed, would you like to install it now?${RESET}"
+        TITLE="DiscordUpdate.sh: ${RED}Error: Discord installed, would you like to uninstall it now?${RESET}"
         echo -e "${TITLE}"
         options=("Uninstall Discord" "Quit")
         select menu in "${options[@]}"
@@ -92,7 +92,7 @@ function depends () {
                 break
         else
             clear
-            echo -e "DiscordUpdate.sh: ${RED}Your package manager is not currently supported by this script. Please install $DEPEND1 manually :(${RESET}"
+            echo -e "DiscordUpdate.sh: ${RED}Your package manager is not currently supported by this script. Please install [$DEPEND1] manually :(${RESET}"
             sleep 5
             exit
         fi
@@ -100,10 +100,34 @@ function depends () {
 }
 
 function discdl () {
-    
-    cd ~/
-    echo -e "DiscordUpdate.sh: Downloading discord.tar.gz from: https://discord.com/api/download/stable?platform=linux&format=tar.gz using [$DEPEND1]$"
-    aria2c -o "discord.tar.gz" "https://discord.com/api/download/stable?platform=linux&format=tar.gz"
+
+    TITLE="DiscordUpdate.sh: Choose a discord build to install:"
+    echo -e "${TITLE}"
+    options=("Stable (Choose if unsure)" "PTB (Beta)" "Canary")
+    select menu in "${options[@]}"
+    do
+            case $menu in
+                "Stable (Choose if unsure)")
+                    cd ~/
+                    echo -e "DiscordUpdate.sh: Downloading discord.tar.gz from: https://discord.com/api/download/stable?platform=linux&format=tar.gz using [$DEPEND1]$"
+                    aria2c -o "discord.tar.gz" "https://discord.com/api/download/stable?platform=linux&format=tar.gz"
+                    break
+                    ;;
+                "PTB (Beta)")
+                    cd ~/
+                    echo -e "DiscordUpdate.sh: Downloading discord.tar.gz from: https://discord.com/api/download/ptb?platform=linux&format=tar.gz using [$DEPEND1]$"
+                    aria2c -o "discord.tar.gz" "https://discord.com/api/download/ptb?platform=linux&format=tar.gz"
+                    break
+                    ;;
+                "Canary (Unstable)")
+                    cd ~/
+                    echo -e "DiscordUpdate.sh: Downloading discord.tar.gz from: https://discord.com/api/download/canary?platform=linux&format=tar.gz using [$DEPEND1]$"
+                    aria2c -o "discord.tar.gz" "https://discord.com/api/download/canary?platform=linux&format=tar.gz"
+                    break
+                    ;;
+                *) echo -e "DiscordUpdate.sh: ${RED}Error: invalid option. $REPLY ${RESET}";;
+            esac
+        done    
 
 }
 
